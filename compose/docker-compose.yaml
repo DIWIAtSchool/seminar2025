@@ -3,5 +3,5 @@ include:
   - postgres.yaml
 #  - backend.yaml
 #  - keycloak.yaml
-#  - backend.yaml
+  - backend.yaml
 #  - frontend.yaml
