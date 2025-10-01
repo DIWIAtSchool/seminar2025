@@ -8,18 +8,18 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
       - setup:/docker-entrypoint-initdb.d
-    #      - ./postgres/initdb.sql:/docker-entrypoint-initdb.d/initdb.sql volume mounts don't work on windoze
+#      - ./postgres/initdb.sql:/docker-entrypoint-initdb.d/initdb.sql volume mounts don't work on windoze
     environment:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_DB=postgres
     healthcheck:
-      test: pg_isready --dbname=demo --username=demo
-      interval: 60s
-      timeout: 10s
-      retries: 3
-      start_period: 30s
-      start_interval: 2s
+          test: pg_isready --dbname=keycloak --username=keycloak
+          interval: 60s
+          timeout: 10s
+          retries: 3
+          start_period: 30s
+          start_interval: 2s
     depends_on:
       init-container:
         condition:
@@ -30,19 +30,19 @@ services:
     volumes:
       - setup:/srv/data
     command:
-      - sh
-      - -c
-      - |
-        cat <<EOF > /srv/data/initdb.sql
-          DROP DATABASE if exists keycloak;
-          DROP USER if exists keycloak;
-          CREATE USER keycloak WITH PASSWORD 'keycloak' LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT -1;
-          CREATE DATABASE keycloak WITH OWNER=keycloak ENCODING='UTF8' CONNECTION LIMIT=-1;
-          DROP DATABASE if exists demo;
-          DROP USER if exists demo;
-          CREATE USER demo WITH PASSWORD 'demo' LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT -1;
-          CREATE DATABASE demo WITH OWNER=demo ENCODING='UTF8' CONNECTION LIMIT=-1;
-        EOF
+        - sh
+        - -c
+        - |
+          cat <<EOF > /srv/data/initdb.sql
+            DROP DATABASE if exists keycloak;
+            DROP USER if exists keycloak;
+            CREATE USER keycloak WITH PASSWORD 'keycloak' LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT -1;
+            CREATE DATABASE keycloak WITH OWNER=keycloak ENCODING='UTF8' CONNECTION LIMIT=-1;
+            DROP DATABASE if exists demo;
+            DROP USER if exists demo;
+            CREATE USER demo WITH PASSWORD 'demo' LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT -1;
+            CREATE DATABASE demo WITH OWNER=demo ENCODING='UTF8' CONNECTION LIMIT=-1;
+          EOF
 volumes:
   postgres:
   setup:
