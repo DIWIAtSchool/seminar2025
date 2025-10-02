@@ -3,9 +3,6 @@
 ### Users ###
 GET {{BASE}}/hello
 
-### Users ###
-GET {{BACKEND}}/api/hello
-
 ###
 GET {{BASE}}/posts
 Content-Type: application/json

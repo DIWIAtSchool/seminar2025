@@ -33,7 +33,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: standard
+#  storageClassName: standard
   resources:
     requests:
       storage: 100Mi
@@ -79,7 +79,7 @@ spec:
             periodSeconds: 5
           livenessProbe:
             exec:
-              command: ["pg_isready"]
+              command: ["pg_isready", "--dbname=demo", "--username=demo"]
           volumeMounts:
             - name: postgres-data
               mountPath: /var/lib/postgresql/data
