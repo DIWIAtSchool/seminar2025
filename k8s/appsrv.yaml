@@ -20,24 +20,24 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
-          startupProbe:
-            httpGet:
-              path: /q/health
-              port: 8080
-            timeoutSeconds: 5
-            initialDelaySeconds: 30
-          readinessProbe:
-            tcpSocket:
-              port: 8080
-            initialDelaySeconds: 30
-            periodSeconds: 10
-          livenessProbe:
-            httpGet:
-              path: /q/health
-              port: 8080
-            timeoutSeconds: 5
-            initialDelaySeconds: 30
-            periodSeconds: 120
+#          startupProbe:
+#            httpGet:
+#              path: /q/health
+#              port: 8080
+#            timeoutSeconds: 5
+#            initialDelaySeconds: 30
+#          readinessProbe:
+#            tcpSocket:
+#              port: 8080
+#            initialDelaySeconds: 30
+#            periodSeconds: 10
+#          livenessProbe:
+#            httpGet:
+#              path: /q/health
+#              port: 8080
+#            timeoutSeconds: 5
+#            initialDelaySeconds: 30
+#            periodSeconds: 120
       # initContainers:
       #   - name: wait
       #     image: {{ .Values.postgres.image }}
